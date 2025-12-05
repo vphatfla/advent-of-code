@@ -1,0 +1,13 @@
+build/
+bin/
+lib/
+.cache/
+.vscode/
+.idea/
+*.exe
+*.dll
+*.so
+*.dylib
+*.out
+.DS_Store
+*.swp
