@@ -5,6 +5,11 @@ project(AdventOfCode2025 VERSION 1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+option(ENABLE_PROFILING "Build with debug symbols for Instruments" ON)
+if(ENABLE_PROFILING)
+    add_compile_options(-g -O2 -fno-omit-frame-pointer)
+endif()
+
 set(SOURCE_FILES
     src/main.cpp
 )
