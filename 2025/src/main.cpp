@@ -1,10 +1,10 @@
 #include <iostream>
 #include <ostream>
-#include "day_4.h"
+#include "day_5.h"
 int main() {
     std::cout << "Hello yall" << std::endl;
 
-    auto res = countAccessablePaperRoll(); 
+    auto res = numbersOfFreshIngredient();
     std::cout << res << std::endl;
     return 0;
 }
