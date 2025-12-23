@@ -10,6 +10,7 @@ const auto FILE_PATH = "data/day_5.txt";
 
 inline auto numbersOfFreshIngredient() -> long {
     long res = 0;
+    long res2 = 0;
 
     auto input = parseMultipleBlocksInputFromFile(FILE_PATH);
     auto raw_ranges = input[0], raw_ingredients = input[1];
@@ -45,11 +46,17 @@ inline auto numbersOfFreshIngredient() -> long {
         // can perform binrary search here
         for (const auto& r: merged_ranges) {
             // std::cout << r.first << " ; " << r.second << std::endl;
-            if (r.first >= i && i <= r.second) {
+            if (r.first <= i && i <= r.second) {
                 res +=1;
                 break;
             }
         }
     }
+
+    for (const auto& p: merged_ranges) {
+        res2 += (p.second - p.first + 1);
+    }
+
+    std::cout << "Part 2 =" << res2 << std::endl;
     return res;
 }
