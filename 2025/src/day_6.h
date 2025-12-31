@@ -8,8 +8,8 @@
 #include <vector>
 const auto FILE_PATH = "data/day_6.txt";
 
-inline void calculateResult(unsigned long long& result, int number, const std::string& op) {
-   if (op == "+") {
+inline void calculateResult(unsigned long long& result, unsigned long long number, const char op) {
+   if (op == '+') {
        result += number;
    } else {
        result *= number;
@@ -31,16 +31,49 @@ inline auto performMathCalculation() -> unsigned long long {
         std::cout << std::endl;
         numbers.emplace_back(std::move(temp));
     }
-     
+
     for (auto col = 0; col < operators.size(); col+=1) {
         unsigned long long temp = numbers[0][col];
         for (auto row = 1; row < numbers.size(); row +=1) {
-           calculateResult(temp, numbers[row][col], operators[col]);
+//           calculateResult(temp, numbers[row][col], operators[col]);
         }
         res += temp;
 
         std::cout << "res = " << res << " & temp=" << temp << std::endl;
     }
 
+    return res;
+}
+
+inline auto performMathCalculationRightLeft() -> unsigned long long {
+    unsigned long long res = 0;
+    auto raw_input = parseArrayOfLineFromFile(FILE_PATH);
+    auto n = raw_input.size();
+    auto m = raw_input[n-1].size();
+    auto operators = std::move(raw_input[n-1]);
+
+    auto op = '+';
+    unsigned long long curr = 0;
+    for (auto col =0; col < operators.size(); col+=1) {
+        if (operators[col] != ' ') {
+            op = operators[col];
+            res += curr;
+            curr = (op == '+') ? 0 : 1;
+        }
+        unsigned long long temp_number = 0;
+        bool hasAnyNumber = false;
+        for (auto row = 0; row < n-1; row +=1) {
+            if (raw_input[row][col] != ' ') {
+                hasAnyNumber = true;
+            } else {
+                continue;
+            }
+            temp_number = temp_number * 10 + (raw_input[row][col] - '0');
+        }
+        if (hasAnyNumber) {
+            calculateResult(curr, temp_number, op);
+        }
+    }
+    res += curr;
     return res;
 }
