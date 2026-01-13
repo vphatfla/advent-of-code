@@ -1,10 +1,10 @@
 #include <iostream>
 #include <ostream>
-#include "day_7.h"
+#include "day_8.h"
 int main() {
     std::cout << "Hello yall" << std::endl;
 
-    auto res = countTimeline();
+    auto res = multipleCircuitSize(); 
     std::cout << res << std::endl;
     return 0;
 }
